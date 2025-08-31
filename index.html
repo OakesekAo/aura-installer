@@ -52,14 +52,36 @@
           </li>
         </ol>
 
+        <!-- Board Selector -->
+        <div class="mb-4 text-center">
+          <label for="boardSelector" class="form-label">Select your board/screen:</label>
+          <select id="boardSelector" class="form-select w-auto d-inline-block">
+            <option value="2.8" selected>Aura 2.8" TFT (default)</option>
+            <option value="2.4">Aura 2.4" TFT</option>
+          </select>
+        </div>
+
         <!-- Install Button -->
         <div class="text-center">
           <script
             type="module"
             src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"
           ></script>
-          <esp-web-install-button manifest="https://surrey-homeware.github.io/aura-installer/bin/manifest.json"></esp-web-install-button>
+          <esp-web-install-button id="auraInstallBtn" manifest="bin/manifest.json"></esp-web-install-button>
         </div>
+
+        <script>
+        // Board selector logic
+        const selector = document.getElementById('boardSelector');
+        const installBtn = document.getElementById('auraInstallBtn');
+        selector.addEventListener('change', function() {
+          if (selector.value === '2.4') {
+            installBtn.setAttribute('manifest', 'bin/aura/2.4/manifest-aura-2.4.json');
+          } else {
+            installBtn.setAttribute('manifest', 'bin/manifest.json');
+          }
+        });
+        </script>
 
         <h2 class="h4 mt-5 mb-3">Inverted Colors Fix</h2>
         <p>
