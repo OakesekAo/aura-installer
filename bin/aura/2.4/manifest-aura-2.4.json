@@ -1,0 +1,24 @@
+{
+  "name": "Aura 2.4\" TFT",
+  "description": "Installer for Aura on 2.4\" TFT ESP32 boards.",
+  "chipFamily": "ESP32",
+  "parts": [
+    {
+      "path": "bin/aura/2.4/bootloader.bin",
+      "address": 4096
+    },
+    {
+      "path": "bin/aura/2.4/partitions.bin",
+      "address": 32768
+    },
+    {
+      "path": "bin/aura/2.4/boot_app0.bin",
+      "address": 57344
+    },
+    {
+      "path": "bin/aura/2.4/app.bin",
+      "address": 65536
+    }
+  ],
+  "new_install_prompt_erase": true
+}
