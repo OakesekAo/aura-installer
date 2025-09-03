@@ -1,0 +1,15 @@
+{
+  "name": "Aura (2.4\" ST7789)",
+  "version": "latest",
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        { "path": "https://github.com/OakesekAo/Aura/releases/latest/download/bootloader-24_ST7789.bin", "offset": 4096 },
+        { "path": "https://github.com/OakesekAo/Aura/releases/latest/download/partitions-24_ST7789.bin", "offset": 32768 },
+        { "path": "https://github.com/OakesekAo/Aura/releases/latest/download/boot_app0-24_ST7789.bin", "offset": 57344 },
+        { "path": "https://github.com/OakesekAo/Aura/releases/latest/download/app-24_ST7789.bin", "offset": 65536 }
+      ]
+    }
+  ]
+}

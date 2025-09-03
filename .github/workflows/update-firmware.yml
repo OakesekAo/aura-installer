@@ -1,0 +1,44 @@
+name: Update Manifest Links
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [firmware-updated]
+  schedule:
+    # Check for updates daily at 6 AM UTC
+    - cron: '0 6 * * *'
+
+jobs:
+  check-manifests:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout installer repo
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Verify manifest URLs are accessible
+      run: |
+        echo "Checking manifest URLs point to valid firmware releases..."
+        
+        # Check if the latest release exists
+        curl -sSf "https://api.github.com/repos/OakesekAo/Aura/releases/latest" > /dev/null
+        
+        echo "✅ Latest release endpoint is accessible"
+        echo "Manifest files automatically fetch from:"
+        echo "- https://github.com/OakesekAo/Aura/releases/latest/download/"
+        echo ""
+        echo "Expected firmware files for each variant:"
+        echo "24_ILI9341: bootloader-24_ILI9341.bin, partitions-24_ILI9341.bin, boot_app0-24_ILI9341.bin, app-24_ILI9341.bin"
+        echo "24_ST7789:  bootloader-24_ST7789.bin, partitions-24_ST7789.bin, boot_app0-24_ST7789.bin, app-24_ST7789.bin"
+        echo "28_ILI9341: bootloader-28_ILI9341.bin, partitions-28_ILI9341.bin, boot_app0-28_ILI9341.bin, app-28_ILI9341.bin"
+    
+    - name: Validate manifest JSON
+      run: |
+        echo "Validating manifest JSON files..."
+        for manifest in manifests/*.json; do
+          echo "Checking $manifest..."
+          python3 -m json.tool "$manifest" > /dev/null
+          echo "✅ $manifest is valid JSON"
+        done

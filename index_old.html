@@ -34,35 +34,21 @@
           You can find the <a href="https://makerworld.com/en/models/1382304-aura-smart-weather-forecast-display">full project instructions here</a>. This page is
           only for installing the software on the ESP32 board.
         </p>
-        
-        <h2 class="h4 mt-5 mb-3">Select Your Screen</h2>
-        <p>Choose your display variant to get the correct firmware:</p>
-        <div class="mb-4">
-          <label for="variant" class="form-label"><strong>Screen Type:</strong></label>
-          <select id="variant" class="form-select">
-            <option value="24_ILI9341">2.4" ILI9341</option>
-            <option value="24_ST7789">2.4" ST7789</option>
-            <option value="28_ILI9341" selected>2.8" ILI9341 (Most Common)</option>
-          </select>
-        </div>
-
-        <h2 class="h4 mt-4 mb-3">Software Installation Instructions</h2>
+        <h2 class="h4 mt-5 mb-3">Software Installation Instructions</h2>
         <ol class="list-group list-group-numbered mb-4">
           <li class="list-group-item">
-            Select your screen type above if it's not already correct.
+            Connect your ESP32-2432S028R ILI9341 board (with 2.8in screen) to
+            your computer's USB port.
           </li>
           <li class="list-group-item">
-            Connect your ESP32 board to your computer's USB port.
-          </li>
-          <li class="list-group-item">
-            Click the 'Install' button below. <strong>This will only work in Google Chrome or
+            Click the 'Connect' button below. <strong>This will only work in Google Chrome or
             Microsoft Edge.</strong>
           </li>
           <li class="list-group-item">
-            When prompted to choose a port, choose "USB Serial".
+            When prompted to choose a port, choose “USB Serial”.
           </li>
           <li class="list-group-item">
-            Click 'Install Aura' and wait for the process to complete.
+            Click 'Install Aura'.
           </li>
         </ol>
 
@@ -72,8 +58,17 @@
             type="module"
             src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"
           ></script>
-          <esp-web-install-button id="install" manifest="manifests/28_ILI9341.json"></esp-web-install-button>
+          <esp-web-install-button manifest="https://surrey-homeware.github.io/aura-installer/bin/manifest.json"></esp-web-install-button>
         </div>
+
+        <h2 class="h4 mt-5 mb-3">Inverted Colors Fix</h2>
+        <p>
+          Some ESP32 boards store colors differently in RAM, so the screen shows up with the wrong colors.
+          If you have that issue, install this version instead.
+        </p>
+          <esp-web-install-button manifest="https://surrey-homeware.github.io/aura-installer/bin/manifest-inverted.json">
+            <button slot="activate">Install fix for inverted colors</button>
+          </esp-web-install-button>
 
 		<p>&nbsp;</p>
         <h4>Help! Installation gets stuck at "Preparing to Install."</h4>
@@ -122,15 +117,5 @@
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     crossorigin="anonymous"
   ></script>
-
-  <!-- JavaScript for variant switching -->
-  <script>
-    const sel = document.getElementById('variant');
-    const btn = document.getElementById('install');
-    
-    sel.addEventListener('change', () => {
-      btn.setAttribute('manifest', `manifests/${sel.value}.json`);
-    });
-  </script>
 </body>
 </html>
