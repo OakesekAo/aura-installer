@@ -1,14 +1,11 @@
 {
-  "name": "Aura (2.8\" ILI9341)",
-  "version": "latest",
+  "name": "Aura (2.8\" ILI9341) - TEST VERSION",
+  "version": "test",
   "builds": [
     {
       "chipFamily": "ESP32",
       "parts": [
-        { "path": "https://github.com/OakesekAo/Aura/releases/latest/download/bootloader-28_ILI9341.bin", "offset": 4096 },
-        { "path": "https://github.com/OakesekAo/Aura/releases/latest/download/partitions-28_ILI9341.bin", "offset": 32768 },
-        { "path": "https://github.com/OakesekAo/Aura/releases/latest/download/boot_app0-28_ILI9341.bin", "offset": 57344 },
-        { "path": "https://github.com/OakesekAo/Aura/releases/latest/download/app-28_ILI9341.bin", "offset": 65536 }
+        { "path": "https://firmware.esphome.io/esp-web-tools/25.8.1/esp-web-tools-example-esp32.factory.bin", "offset": 0 }
       ]
     }
   ]
