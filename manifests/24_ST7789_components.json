@@ -5,10 +5,10 @@
     {
       "chipFamily": "ESP32",
       "parts": [
-        { "path": "firmware/aura-bootloader-24-st7789.bin", "offset": 4096 },
-        { "path": "firmware/aura-partitions-24-st7789.bin", "offset": 32768 },
-        { "path": "firmware/aura-boot-app0-24-st7789.bin", "offset": 57344 },
-        { "path": "firmware/aura-app-24-st7789.bin", "offset": 65536 }
+        { "path": "https://oakesekao.github.io/aura-installer/firmware/aura-bootloader-24-st7789.bin", "offset": 4096 },
+        { "path": "https://oakesekao.github.io/aura-installer/firmware/aura-partitions-24-st7789.bin", "offset": 32768 },
+        { "path": "https://oakesekao.github.io/aura-installer/firmware/aura-boot-app0-24-st7789.bin", "offset": 57344 },
+        { "path": "https://oakesekao.github.io/aura-installer/firmware/aura-app-24-st7789.bin", "offset": 65536 }
       ]
     }
   ]

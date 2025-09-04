@@ -10,6 +10,45 @@
     rel="stylesheet"
     crossorigin="anonymous"
   />
+  <style>
+    /* Custom styles for ESP Web Tools modal */
+    ewt-install-dialog {
+      position: relative;
+    }
+    
+    /* Add close button overlay */
+    .esp-modal-close {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 10000;
+      background: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      cursor: pointer;
+      display: none;
+    }
+    
+    .esp-modal-close:hover {
+      background: #c82333;
+    }
+  </style>
+</head>l>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aura Installer</title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    crossorigin="anonymous"
+  />
 </head>
 <body>
   <!-- Navbar Header -->
@@ -80,7 +119,9 @@
             type="module"
             src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"
           ></script>
-          <esp-web-install-button id="install" manifest="manifests/28_ILI9341.json"></esp-web-install-button>
+          <esp-web-install-button id="install" manifest="manifests/28_ILI9341.json">
+            <button slot="activate" class="btn btn-primary btn-lg">Install Aura Weather Display</button>
+          </esp-web-install-button>
         </div>
 
         <!-- Debug Console -->
@@ -227,6 +268,40 @@
       };
 
       addToConsole('🚀 Debug console initialized');
+      
+      // Add close button for ESP Web Tools modal
+      const closeButton = document.createElement('button');
+      closeButton.className = 'esp-modal-close';
+      closeButton.innerHTML = '×';
+      closeButton.title = 'Close installer';
+      document.body.appendChild(closeButton);
+      
+      // Show/hide close button when modal opens/closes
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          mutation.addedNodes.forEach((node) => {
+            if (node.tagName === 'EWT-INSTALL-DIALOG') {
+              closeButton.style.display = 'block';
+            }
+          });
+          mutation.removedNodes.forEach((node) => {
+            if (node.tagName === 'EWT-INSTALL-DIALOG') {
+              closeButton.style.display = 'none';
+            }
+          });
+        });
+      });
+      observer.observe(document.body, { childList: true });
+      
+      // Close button functionality
+      closeButton.addEventListener('click', () => {
+        const dialog = document.querySelector('ewt-install-dialog');
+        if (dialog) {
+          dialog.remove();
+          closeButton.style.display = 'none';
+          addToConsole('🔴 Installation dialog closed by user');
+        }
+      });
     });
   </script>
 </body>
