@@ -2,8 +2,6 @@
 
 Web-based ESP32 firmware installer for Aura weather display boards.
 
-**⚠️ IMPORTANT**: This installer currently uses **test firmware** (ESPHome demo) since the base Aura repository doesn't have releases yet. The installer mechanism works correctly, but won't install actual Aura firmware until the base repository publishes releases.
-
 ## Supported Variants
 
 - **2.4" ILI9341** - 2.4 inch displays with ILI9341 driver
@@ -33,13 +31,9 @@ img/
 index.html            # Main installer page
 ```
 
-## Current Status (Test Mode)
+## Firmware Sources
 
-The installer currently uses ESPHome demo firmware to test the installation process. Once the base Aura repository has proper releases, the manifests will be updated to fetch actual Aura firmware.
-
-### Expected Production Firmware Sources
-
-Each manifest will fetch binaries from the latest Aura release:
+Each manifest fetches binaries from the latest Aura release:
 
 - `https://github.com/OakesekAo/Aura/releases/latest/download/bootloader-{variant}.bin`
 - `https://github.com/OakesekAo/Aura/releases/latest/download/partitions-{variant}.bin`

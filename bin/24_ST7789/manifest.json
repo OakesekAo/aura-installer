@@ -1,0 +1,15 @@
+{
+  "name": "Aura (2.4\" ST7789)",
+  "version": "latest",
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        { "path": "../common/bootloader.bin", "offset": 4096 },
+        { "path": "../common/partitions.bin", "offset": 32768 },
+        { "path": "../common/boot_app0.bin", "offset": 57344 },
+        { "path": "app.bin", "offset": 65536 }
+      ]
+    }
+  ]
+}
