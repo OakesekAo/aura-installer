@@ -5,10 +5,10 @@
     {
       "chipFamily": "ESP32",
       "parts": [
-        { "path": "firmware/bootloader-28_ILI9341.bin", "offset": 4096 },
-        { "path": "firmware/partitions-28_ILI9341.bin", "offset": 32768 },
-        { "path": "firmware/boot_app0-28_ILI9341.bin", "offset": 57344 },
-        { "path": "firmware/app-28_ILI9341.bin", "offset": 65536 }
+        { "path": "https://oakesekao.github.io/aura-installer/firmware/bootloader-28_ILI9341.bin", "offset": 4096 },
+        { "path": "https://oakesekao.github.io/aura-installer/firmware/partitions-28_ILI9341.bin", "offset": 32768 },
+        { "path": "https://oakesekao.github.io/aura-installer/firmware/boot_app0-28_ILI9341.bin", "offset": 57344 },
+        { "path": "https://oakesekao.github.io/aura-installer/firmware/app-28_ILI9341.bin", "offset": 65536 }
       ]
     }
   ]
