@@ -75,6 +75,22 @@
           <esp-web-install-button id="install" manifest="manifests/28_ILI9341.json"></esp-web-install-button>
         </div>
 
+        <!-- Debug Console -->
+        <div class="mt-4">
+          <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#debugConsole" aria-expanded="false" aria-controls="debugConsole">
+            🐛 Show Debug Console
+          </button>
+          <div class="collapse mt-2" id="debugConsole">
+            <div class="card">
+              <div class="card-body">
+                <h6 class="card-title">Debug Console</h6>
+                <div id="console" style="height: 200px; overflow-y: auto; background: #f8f9fa; padding: 10px; font-family: monospace; font-size: 12px; border: 1px solid #dee2e6;"></div>
+                <button class="btn btn-sm btn-outline-secondary mt-2" onclick="clearConsole()">Clear</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
 		<p>&nbsp;</p>
         <h4>Help! Installation gets stuck at "Preparing to Install."</h4>
         <p>
@@ -130,6 +146,77 @@
     
     sel.addEventListener('change', () => {
       btn.setAttribute('manifest', `manifests/${sel.value}.json`);
+      addToConsole(`Switched to ${sel.value} variant`);
+    });
+
+    // Debug console functions
+    function addToConsole(message) {
+      const console = document.getElementById('console');
+      if (console) {
+        const timestamp = new Date().toLocaleTimeString();
+        console.innerHTML += `<div>[${timestamp}] ${message}</div>`;
+        console.scrollTop = console.scrollHeight;
+      }
+    }
+
+    function clearConsole() {
+      document.getElementById('console').innerHTML = '';
+    }
+
+    // Capture console logs
+    const originalLog = console.log;
+    const originalError = console.error;
+    const originalWarn = console.warn;
+
+    console.log = function(...args) {
+      originalLog.apply(console, args);
+      addToConsole('LOG: ' + args.join(' '));
+    };
+
+    console.error = function(...args) {
+      originalError.apply(console, args);
+      addToConsole('❌ ERROR: ' + args.join(' '));
+    };
+
+    console.warn = function(...args) {
+      originalWarn.apply(console, args);
+      addToConsole('⚠️ WARN: ' + args.join(' '));
+    };
+
+    // ESP Web Tools event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      const installButton = document.getElementById('install');
+      
+      installButton.addEventListener('state-changed', (e) => {
+        addToConsole(`State changed: ${e.detail.state}`);
+      });
+
+      installButton.addEventListener('error', (e) => {
+        addToConsole(`❌ ESP Web Tools Error: ${e.detail.error}`);
+      });
+
+      // Capture fetch errors
+      const originalFetch = window.fetch;
+      window.fetch = function(...args) {
+        const url = args[0];
+        addToConsole(`🌐 Fetching: ${url}`);
+        
+        return originalFetch.apply(this, args)
+          .then(response => {
+            if (!response.ok) {
+              addToConsole(`❌ Fetch failed: ${response.status} ${response.statusText} for ${url}`);
+            } else {
+              addToConsole(`✅ Fetch success: ${response.status} for ${url}`);
+            }
+            return response;
+          })
+          .catch(error => {
+            addToConsole(`❌ Fetch error: ${error.message} for ${url}`);
+            throw error;
+          });
+      };
+
+      addToConsole('🚀 Debug console initialized');
     });
   </script>
 </body>
