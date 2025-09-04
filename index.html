@@ -163,6 +163,26 @@
       document.getElementById('console').innerHTML = '';
     }
 
+    // Capture console logs
+    const originalLog = console.log;
+    const originalError = console.error;
+    const originalWarn = console.warn;
+
+    console.log = function(...args) {
+      originalLog.apply(console, args);
+      addToConsole('LOG: ' + args.join(' '));
+    };
+
+    console.error = function(...args) {
+      originalError.apply(console, args);
+      addToConsole('❌ ERROR: ' + args.join(' '));
+    };
+
+    console.warn = function(...args) {
+      originalWarn.apply(console, args);
+      addToConsole('⚠️ WARN: ' + args.join(' '));
+    };
+
     // ESP Web Tools event listeners
     document.addEventListener('DOMContentLoaded', () => {
       const installButton = document.getElementById('install');
@@ -176,6 +196,27 @@
           addToConsole(`❌ ESP Web Tools Error: ${JSON.stringify(e.detail)}`);
         });
       }
+
+      // Capture fetch errors
+      const originalFetch = window.fetch;
+      window.fetch = function(...args) {
+        const url = args[0];
+        addToConsole(`🌐 Fetching: ${url}`);
+        
+        return originalFetch.apply(this, args)
+          .then(response => {
+            if (!response.ok) {
+              addToConsole(`❌ Fetch failed: ${response.status} ${response.statusText} for ${url}`);
+            } else {
+              addToConsole(`✅ Fetch success: ${response.status} for ${url}`);
+            }
+            return response;
+          })
+          .catch(error => {
+            addToConsole(`❌ Fetch error: ${error.message} for ${url}`);
+            throw error;
+          });
+      };
 
       addToConsole('🚀 Debug console initialized');
     });
