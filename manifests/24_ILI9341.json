@@ -1,11 +1,11 @@
 {
   "name": "Aura (2.4\" ILI9341)",
-  "version": "v1.4.2",
+  "version": "v1.0.7-dual-flash",
   "builds": [
     {
       "chipFamily": "ESP32",
       "parts": [
-        { "path": "https://oakesekao.github.io/aura-installer/firmware/aura-firmware-24-ILI9341.bin", "offset": 0 }
+        { "path": "https://github.com/oakesekao/aura/releases/download/v1.0.7-dual-flash/aura-firmware-24-ILI9341.bin", "offset": 0 }
       ]
     }
   ]

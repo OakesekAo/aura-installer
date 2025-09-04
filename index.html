@@ -40,10 +40,18 @@
         <div class="mb-4">
           <label for="variant" class="form-label"><strong>Screen Type:</strong></label>
           <select id="variant" class="form-select">
-            <option value="24_ILI9341">2.4" ILI9341</option>
-            <option value="24_ST7789">2.4" ST7789</option>
-            <option value="28_ILI9341" selected>2.8" ILI9341 (Most Common)</option>
+            <option value="24_ILI9341">2.4" ILI9341 (Standard)</option>
+            <option value="24_ILI9341_components">2.4" ILI9341 (Fix Chip ID Error)</option>
+            <option value="24_ST7789">2.4" ST7789 (Standard)</option>
+            <option value="24_ST7789_components">2.4" ST7789 (Fix Chip ID Error)</option>
+            <option value="28_ILI9341" selected>2.8" ILI9341 (Standard - Most Common)</option>
+            <option value="28_ILI9341_components">2.8" ILI9341 (Fix Chip ID Error)</option>
           </select>
+        </div>
+
+        <div class="alert alert-info">
+          <h6>🔧 Having "wrong chip id 0x0002" errors?</h6>
+          <p>Select the "Fix Chip ID Error" variant for your display type. This uses a component-based installation approach that works better with some ESP32 boards.</p>
         </div>
 
         <h2 class="h4 mt-4 mb-3">Software Installation Instructions</h2>
