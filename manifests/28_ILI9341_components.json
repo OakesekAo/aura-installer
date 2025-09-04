@@ -1,0 +1,15 @@
+{
+  "name": "Aura (2.8\" ILI9341 - Fix Chip ID)",
+  "version": "v1.0.7-dual-flash",
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        { "path": "firmware/aura-bootloader-28-ili9341.bin", "offset": 4096 },
+        { "path": "firmware/aura-partitions-28-ili9341.bin", "offset": 32768 },
+        { "path": "firmware/aura-boot-app0-28-ili9341.bin", "offset": 57344 },
+        { "path": "firmware/aura-app-28-ili9341.bin", "offset": 65536 }
+      ]
+    }
+  ]
+}

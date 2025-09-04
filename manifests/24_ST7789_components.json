@@ -1,0 +1,15 @@
+{
+  "name": "Aura (2.4\" ST7789 - Fix Chip ID)",
+  "version": "v1.0.7-dual-flash",
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        { "path": "firmware/aura-bootloader-24-st7789.bin", "offset": 4096 },
+        { "path": "firmware/aura-partitions-24-st7789.bin", "offset": 32768 },
+        { "path": "firmware/aura-boot-app0-24-st7789.bin", "offset": 57344 },
+        { "path": "firmware/aura-app-24-st7789.bin", "offset": 65536 }
+      ]
+    }
+  ]
+}
