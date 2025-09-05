@@ -1,6 +1,6 @@
 {
   "name": "Aura (2.4\" ST7789 - Fix Chip ID)",
-  "version": "v1.0.7-dual-flash",
+  "version": "v1.0.8",
   "builds": [
     {
       "chipFamily": "ESP32",
